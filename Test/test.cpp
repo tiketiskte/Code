@@ -1,9 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 int main(void) {
-    int n;
+    int n, x;
     cin >> n;
-    printf("%d hello world\n", n);
+    cin >> x;
+    printf("%d %d hello world\n", n, x);
     system("pause");
     return 0;
 }
