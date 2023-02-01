@@ -39,10 +39,6 @@ int main(void) {
     for(int i = 1; i <= n; i++) {
         for(int j = 1; j <= m; j++) {
             cin >> a[i][j];
-        }
-    }
-    for(int i = 1; i <= n; i++) {
-        for(int j = 1; j <= m; j++) {
             insert(i, j, i, j, a[i][j]);
         }
     }
@@ -53,14 +49,15 @@ int main(void) {
     }
     for(int i = 1; i <= n; i++) {
         for(int j = 1; j <= m; j++) {
-            b[i][j] += b[i - 1][j] + b[i][j - 1] - b[i - 1][j - 1];
+            a[i][j] = b[i][j] + a[i - 1][j] + a[i][j - 1] - a[i - 1][j - 1];
         }
     }
     for(int i = 1; i <= n; i++) {
         for(int j = 1; j <= m; j++) {
-            cout << b[i][j] << " ";
+            cout << a[i][j] << " ";
         }
         cout << endl;
     }
+    system("pause");
     return 0;
 }

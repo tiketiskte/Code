@@ -31,6 +31,12 @@ void insert(int l, int r, int c) {
     b[l] += c;
     b[r + 1] -= c;
 }
+void print() {
+    for (int i = 1; i <= n; i++) {
+        cout << b[i] << " ";
+    }
+    cout << endl;
+}
 int main(void) {
     IOS
     cin >> n >> m;
@@ -40,9 +46,12 @@ int main(void) {
     for(int i = 1; i <= n; i++) {
         insert(i, i, a[i]);
     }
+    print();
     while(m--) {
         cin >> l >> r >> c;
         insert(l, r, c);
+        cout << "###:" << endl;
+        print();
     }
     for(int i = 1; i <= n; i++) {
         a[i] = a[i - 1] + b[i];
@@ -51,5 +60,6 @@ int main(void) {
         cout << a[i] << " ";
     }
     cout << endl;
+    system("pause");
     return 0;
 }
