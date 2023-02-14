@@ -21,22 +21,23 @@ typedef pair <ll, ll> PLL;
 typedef pair <double, double> PDD;
 ll gcd(ll a, ll b) {return b ? gcd(b, a % b) : a;}
 const int maxn = 1e5 + 10;
-int n, x;
-stack<int> s;
+int n, a[maxn], stk[maxn], tt;
 int main(void) {
     IOS
     cin >> n;
-    for(int i = 0; i < n; i++) {
-        cin >> x;
-        while(!s.empty() && x <= s.top()) {
-            s.pop();
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    for (int i = 0; i < n; i++) {
+        while(tt && stk[tt] >= a[i]) { //判断栈是否为空且栈顶元素是否小于当前元素
+            tt--;
         }
-        if(!s.empty()) {
-            cout << s.top() << " ";
+        if(tt) {
+            cout << stk[tt] << " ";
         } else {
-            cout << "-1" << " ";
+            cout << -1 << " ";
         }
-        s.push(x);
+        stk[++tt] = a[i]; //每次数组元素进栈
     }
     cout << endl;
     system("pause");
