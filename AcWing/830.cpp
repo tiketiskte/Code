@@ -21,25 +21,22 @@ typedef pair <ll, ll> PLL;
 typedef pair <double, double> PDD;
 ll gcd(ll a, ll b) {return b ? gcd(b, a % b) : a;}
 const int maxn = 1e5 + 10;
-int a[maxn], n, ans[maxn];
+int n, x;
+stack<int> s;
 int main(void) {
     IOS
     cin >> n;
     for(int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
-    ans[0] = -1;
-    for(int i = 1; i < n; i++) {
-        for(int j = i - 1; j >= 0; j--) {
-            if(a[j] < a[i]) {
-                ans[i] = a[j];
-                break;
-            }
-            ans[i] = -1;
+        cin >> x;
+        while(!s.empty() && x <= s.top()) {
+            s.pop();
         }
-    }
-    for(int i = 0; i < n; i++) {
-        cout << ans[i] << " ";
+        if(!s.empty()) {
+            cout << s.top() << " ";
+        } else {
+            cout << "-1" << " ";
+        }
+        s.push(x);
     }
     cout << endl;
     system("pause");
