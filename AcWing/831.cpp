@@ -27,14 +27,32 @@ char p[maxn_n], s[maxn_m];
 int main(void) {
     IOS
     cin >> n >> p + 1 >> m >> s + 1;
-    for(int i = 1, j = 0; i < n; i++) {
+    // ne[1] = 0;
+    for(int i = 2, j = 0; i <= m; i++) {
+        while(j != 0 && p[i] != p[j + 1]) {
+            j = ne[j];
+        }
+        if(p[i] == p[j + 1]) {
+            j++;
+        }
+        ne[i] = j;
+    }
+    for(int i = 1, j = 0; i <= m; i++) {
         while(j != 0 && s[i] != p[j + 1]) {
             j = ne[j];
         }
+        //如果j有对应p串的元素,且s[i] != p[j+1],则失配,移动p串
+        //用while是由于移动后可能仍然失配,所以要继续移动直到匹配或整个p串移到后面(j = 0)
         if(s[i] == p[j + 1]) {
             j++;
         }
+        if(j == n) {
+            //print
+            cout << i - n << " ";
+            j = ne[j]; // 继续匹配下一个子串
+        }
     }
+    cout << endl;
     system("pause");
     return 0;
 }
