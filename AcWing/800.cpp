@@ -20,37 +20,27 @@ typedef pair <int, int> PII;
 typedef pair <ll, ll> PLL;
 typedef pair <double, double> PDD;
 ll gcd(ll a, ll b) {return b ? gcd(b, a % b) : a;}
-
-const int maxn_n = 1e5 + 10, maxn_m = 1e6 + 10;
-int n, m, ne[maxn_n];
-char p[maxn_n], s[maxn_m];
+const int maxn = 1e5 + 10;
+int n, m, x, a[maxn], b[maxn];
 int main(void) {
     IOS
-    cin >> n >> p + 1 >> m >> s + 1;
-    // ne[1] = 0;
-    for(int i = 2, j = 0; i <= n; i++) {
-        while(j != 0 && p[i] != p[j + 1]) {
-            j = ne[j];
-        }
-        if(p[i] == p[j + 1]) {
-            j++;
-        }
-        ne[i] = j;
+    cin >> n >>  m >> x;
+    for(int i = 0; i < n; i++) {
+        cin >> a[i];
     }
-    for(int i = 1, j = 0; i <= m; i++) {
-        while(j != 0 && s[i] != p[j + 1]) {
-            j = ne[j];
+    for(int i = 0; i < m; i++) {
+        cin >> b[i];
+    }
+    for(int i = 0; i < n; i++) {
+        int j = m - 1;
+        while(j >= 0 && a[i] + b[j] > x) {
+            j--;
         }
-        if(s[i] == p[j + 1]) {
-            j++;
-        }
-        if(j == n) {
-            //print
-            cout << i - n << " ";
-            j = ne[j]; // next 
+        if(a[i] + b[j] == x) {
+            cout << i << " " << j << endl;
+            break;
         }
     }
-    cout << endl;
     system("pause");
     return 0;
 }

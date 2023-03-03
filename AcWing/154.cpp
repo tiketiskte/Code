@@ -22,38 +22,38 @@ typedef pair <double, double> PDD;
 ll gcd(ll a, ll b) {return b ? gcd(b, a % b) : a;}
 
 const int maxn = 1e6 + 10;
-int n, k, a[maxn], q[maxn], hh, tt;
+int n, k, a[maxn];
 int main(void) {
     IOS
     cin >> n >> k;
     for(int i = 0; i < n; i++) {
         cin >> a[i];
     }
-    hh = 0, tt = -1;
+    deque<int> dq;
     for(int i = 0; i < n; i++) {
-        if(hh <= tt && q[hh] < i - k + 1) { //判断队头是否已经滑出窗口
-            hh++;
+        while(!dq.empty() && dq.front() < i - k + 1) {
+            dq.pop_front();
         }
-        while(hh <= tt && a[q[tt]] >= a[i]) {
-            tt--;
+        while(!dq.empty() && a[dq.back()] >= a[i]) {
+            dq.pop_back();
         }
-        q[++tt] = i;
+        dq.push_back(i);
         if(i >= k - 1) {
-            cout << a[q[hh]] << " ";
+            cout << a[dq.front()] << " ";
         }
     }
     cout << endl;
-    hh = 0, tt = -1;
+    dq.clear();
     for(int i = 0; i < n; i++) {
-        if(hh <= tt && q[hh] < i - k + 1) { //判断队头是否已经滑出窗口
-            hh++;
+        while(!dq.empty() && dq.front() < i - k + 1) {
+            dq.pop_front();
         }
-        while(hh <= tt && a[q[tt]] <= a[i]) {
-            tt--;
+        while(!dq.empty() && a[dq.back()] <= a[i]) {
+            dq.pop_back();
         }
-        q[++tt] = i;
+        dq.push_back(i);
         if(i >= k - 1) {
-            cout << a[q[hh]] << " ";
+            cout << a[dq.front()] << " ";
         }
     }
     cout << endl;
