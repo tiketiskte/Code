@@ -22,6 +22,7 @@
     "files.associations": {
         "random": "cpp",
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "numeric": "cpp"
     }, // 格式化时调整include的顺序（按字母排序）
 }

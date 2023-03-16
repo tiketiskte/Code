@@ -22,11 +22,12 @@ typedef pair <double, double> PDD;
 ll gcd(ll a, ll b) {return b ? gcd(b, a % b) : a;}
 
 const int maxn = 1e5 + 10;
-int son[maxn][26], cnt[maxn], idx;
+int n, son[maxn][26], cnt[maxn], idx;
 // son存Trie树中所有节点的儿子 cnt存Trie树中以当前结点为结尾的单词个数 idx存当前用到的结点下标
 // 下标为0的点既是根节点,又是空结点
-void insert(char str[]) {
-    int p =  0;
+string op, str;
+void insert(string str) {
+    int p = 0;
     for(int i = 0; str[i]; i++) {
         int u = str[i] - 'a';
         if(!son[p][u]) {
@@ -36,8 +37,8 @@ void insert(char str[]) {
     }
     cnt[p]++;
 }
-int query(char str[]) {
-    int p =  0;
+int query(string str) {
+    int p = 0;
     for(int i = 0; str[i]; i++) {
         int u = str[i] - 'a';
         if(!son[p][u]) {
@@ -49,7 +50,15 @@ int query(char str[]) {
 }
 int main(void) {
     IOS
-
+    cin >> n;
+    while(n--) {
+        cin >> op >> str;
+        if(op == "I") {
+            insert(str);
+        } else {
+            cout << query(str) << endl;
+        }
+    }
     system("pause");
     return 0;
 }
