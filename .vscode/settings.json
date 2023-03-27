@@ -23,6 +23,7 @@
         "random": "cpp",
         "iostream": "cpp",
         "ostream": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "cstring": "cpp"
     }, // 格式化时调整include的顺序（按字母排序）
 }
