@@ -1,33 +1,37 @@
-/**
-* Copyright(c)
-* Author : tiketiskte
-**/
 #include <bits/stdc++.h>
-using namespace std;
-#define IOS {ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);}
-#define rep(i, a, n) for(int i = a; i < n; i++)
-#define per(i, a, n) for(int i = n - 1; i >= a; i--)
-#define pb push_back
-#define mp make_pair
-#define fi first
-#define se second
-#define sqr(x) (x) * (x)
-#define SZ(X) (int)X.size()
-#define all(x) (x).begin(), (x).end()
-#define INF 0x3f3f3f3f
-typedef long long ll;
-typedef pair <int, int> PII;
-typedef pair <ll, ll> PLL;
-typedef pair <double, double> PDD;
-ll gcd(ll a, ll b) {return b ? gcd(b, a % b) : a;}
 
+using namespace std;
+const int maxn = 100000 + 10;
+int n, k, a[maxn];
+int solve(int l, int r, int k) {
+    if(l == r) {
+        return a[l];
+    }
+    int i = l - 1, j = r + 1, mid = a[(l + r) >> 1];
+    while(i < j) {
+        do {
+            i++;
+        } while(a[i] < mid);
+        do {
+            j--;
+        } while(a[j] > mid);
+        if(a[i] < a[j]) {
+            swap(a[i], a[j]);
+        }
+    }
+    int s_l = j - l + 1;
+    if(k <= s_l) {
+        return solve(l, j, k);
+    } else {
+        return solve(j + 1, r, k - s_l);
+    }
+}
 int main(void) {
-    IOS
-    queue<int> q;
-    q.push(1);
-    cout << q.front() << endl;
-    q = queue<int> ();
-    cout << q.front() << endl;
+    cin >> n >> k;
+    for(int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    cout << solve(0, n - 1, k) << endl;
     system("pause");
     return 0;
 }
